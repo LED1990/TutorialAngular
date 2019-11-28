@@ -7,18 +7,22 @@ import { HeroesComponent } from './fundamentals/heroes/heroes.component';
 import {FormsModule} from "@angular/forms";
 import { HeroDetailComponent } from './fundamentals/hero-detail/hero-detail.component';
 import { MessagesComponent } from './fundamentals/messages/messages.component';
+import { FundamentalsRoutingModule } from './fundamentals/routes/fundamentals-routing.module';
+import { DashboardComponent } from './fundamentals/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
     HeroDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FundamentalsRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

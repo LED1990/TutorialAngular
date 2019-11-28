@@ -10,12 +10,17 @@
 
 <h2>Heroes list</h2>
 <ul class="heroes">
-  <li *ngFor="let element of heroesList"
-      (click)="onSelect(element)"
-      [class.selected]="element === selectedHero">
-    <span class="badge">{{element.id}}</span>{{element.name}}
+<!--  version before routing by ID-->
+<!--  <li *ngFor="let element of heroesList"-->
+<!--      (click)="onSelect(element)"-->
+<!--      [class.selected]="element === selectedHero">-->
+<!--    <span class="badge">{{element.id}}</span>{{element.name}}-->
+<!--  </li>-->
+  <li *ngFor="let hero of heroesList">
+    <a routerLink="/detail/{{hero.id}}">
+      <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </a>
   </li>
 </ul>
 
-<app-hero-detail [hero]="selectedHero"></app-hero-detail>
 
