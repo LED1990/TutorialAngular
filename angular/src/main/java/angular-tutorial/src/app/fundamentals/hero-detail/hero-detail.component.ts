@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Hero} from "../../classes/fundamentals/hero";
 import {ActivatedRoute} from "@angular/router";
 import {HeroService} from "../services/hero.service";
@@ -13,7 +13,8 @@ export class HeroDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private heroService: HeroService,
-              private location: Location) { }
+              private location: Location) {
+  }
 
   ngOnInit() {
     this.getHero();
@@ -21,12 +22,16 @@ export class HeroDetailComponent implements OnInit {
 
   @Input() hero: Hero; //since details comes from route @Input isn't necessery (left just to remember)
 
-  private getHero():void{
+  private getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id'); //'+' at the beggining is to convert nubmer to string
     this.heroService.getHero(id).subscribe(result => this.hero = result);
   }
 
-  goBack(): void{
+  private updateHero(): void {
+    this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
+  }
+
+  goBack(): void {
     this.location.back();
   }
 

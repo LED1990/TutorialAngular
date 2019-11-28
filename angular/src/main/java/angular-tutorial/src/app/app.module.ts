@@ -9,6 +9,7 @@ import { HeroDetailComponent } from './fundamentals/hero-detail/hero-detail.comp
 import { MessagesComponent } from './fundamentals/messages/messages.component';
 import { FundamentalsRoutingModule } from './fundamentals/routes/fundamentals-routing.module';
 import { DashboardComponent } from './fundamentals/dashboard/dashboard.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DashboardComponent } from './fundamentals/dashboard/dashboard.component
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FundamentalsRoutingModule
+    FundamentalsRoutingModule,
+    HttpClientModule//added here is available for everybody
   ],
   providers: [],
   bootstrap: [AppComponent]
