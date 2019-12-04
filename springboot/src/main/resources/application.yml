@@ -2,6 +2,12 @@ server:
   port: 9093
 #  port jenkins!! 8099
 
+logging:
+  level:
+    root: error
+    org:
+      springframework: info
+    app: info
 
 spring:
   datasource:
@@ -14,8 +20,9 @@ spring:
 ---
 spring:
   profiles: "dev"
-
-
+logging:
+  level:
+    app.udemy: debug
 ---
 spring:
   profiles: "udemyHibernate"
@@ -23,3 +30,14 @@ spring:
     url: jdbc:postgresql://localhost:5432/udemyHibernate
     username: udemy
     password: udemy1664
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+logging:
+  level:
+    app.udemy: debug
+    org:
+      springframework:
+        transaction:
+          interceptor: trace
