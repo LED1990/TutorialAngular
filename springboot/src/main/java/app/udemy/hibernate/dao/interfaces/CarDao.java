@@ -8,5 +8,6 @@ public interface CarDao {
 
     Long saveNewCar(Car car);
     void persistNewCar(Car car);
+    Car getCarById(Long id);
 
 }

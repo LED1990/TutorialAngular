@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public class CarDaoImpl extends CommonDao<Car> implements CarDao {
+public class CarDaoImpl extends CommonDaoImpl<Car> implements CarDao {
 
     /**
      * with @Transactonal spring handles transaction (creating, commiting etc.) without it I have to handle transaction
@@ -43,5 +43,11 @@ public class CarDaoImpl extends CommonDao<Car> implements CarDao {
     @Transactional
     public void persistNewCar(Car car) {
         persist(car);
+    }
+
+    @Override
+    @Transactional
+    public Car getCarById(Long id) {
+        return getById(id, Car.class);
     }
 }

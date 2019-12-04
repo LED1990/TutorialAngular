@@ -1,13 +1,12 @@
 package app.udemy.hibernate.controllers;
 
 import app.udemy.hibernate.dao.interfaces.CarDao;
+import app.udemy.hibernate.model.Body;
 import app.udemy.hibernate.model.Car;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/hibernate")
@@ -36,6 +35,12 @@ public class CarsController {
         return "New car ID by save method: " + newCarId;
     }
 
+    @GetMapping("/car")
+    public Car getSingleCar(@RequestParam Long id ){
+        logger.debug("Getting car");
+        return carDao.getCarById(id);
+    }
+
     @PutMapping("/addcar/persist")
     public String persistNewCar() {
         carDao.persistNewCar(mockNewCar());
@@ -48,6 +53,12 @@ public class CarsController {
         newCarMock.setDriverName("driver name");
         newCarMock.setInfo("car info");
         newCarMock.setName("AUDI");
+
+        Body mockBody = new Body();
+        mockBody.setAdditionalInfo("body info");
+        mockBody.setNumberOfDoors(5);
+
+        newCarMock.setBody(mockBody);
         return newCarMock;
     }
 }

@@ -1,5 +1,6 @@
 package app.udemy.hibernate.dao;
 
+import lombok.Setter;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +10,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
-public abstract class CommonDao<T> {
+@Setter
+public abstract class CommonDaoImpl<T> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    /**
+       /**
      * with @PersistenceContext Enetity manager is managed by context. I dont have to create this object by my self form EntityManagerFactory
      */
     @PersistenceContext
@@ -52,6 +53,10 @@ public abstract class CommonDao<T> {
 
     void persist(T object) {
         getHibernateSession().persist(object);
+    }
+
+    T getById(Long id, final Class<T> clazz){
+        return getHibernateSession().find(clazz, id);
     }
 
     private Session getHibernateSession() {
