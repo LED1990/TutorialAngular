@@ -4,12 +4,22 @@ server:
 
 
 spring:
+  datasource:
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
   profiles:
-    active: "dev"
+    active: @active.profile@
+
 ---
 spring:
   profiles: "dev"
 
+
 ---
 spring:
   profiles: "udemyHibernate"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/udemyHibernate
+    username: udemy
+    password: udemy1664
