@@ -3,7 +3,9 @@ package app.udemy.hibernate.controllers;
 import app.udemy.hibernate.dao.interfaces.CarDao;
 import app.udemy.hibernate.model.Body;
 import app.udemy.hibernate.model.Car;
+import app.udemy.hibernate.model.Wheel;
 import app.udemy.hibernate.model.enums.BodyType;
+import app.udemy.hibernate.model.enums.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +62,22 @@ public class CarsController {
         mockBody.setAdditionalInfo("body info");
         mockBody.setNumberOfDoors(5);
         mockBody.setBodyType(BodyType.SEDAN);
+        mockBody.setBodyColor(Color.GREEN);
+
+        Wheel wheel = new Wheel();
+        wheel.setSize(20);
+        wheel.setManufacturer("Wheel man 1");
+
+        Wheel wheel1 = new Wheel();
+        wheel1.setSize(40);
+        wheel1.setManufacturer("Wheel1 man 2");
 
         mockBody.setCar(newCarMock);
+        newCarMock.addWheel(wheel);
+        newCarMock.addWheel(wheel1);
         newCarMock.setBody(mockBody);
+
+        logger.info(" "+ newCarMock.getWheels().contains(wheel1));
         return newCarMock;
     }
 }

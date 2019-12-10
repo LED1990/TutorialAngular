@@ -17,7 +17,9 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 public class Body implements Serializable {
-    //no @GeneratedValue annotation because this ID is also FK for Car table
+    /**
+     * NO! @GeneratedValue annotation because this ID is also FK for Car table (MapsBy)
+     */
     @Id
     private Long id;
     @Enumerated
@@ -31,10 +33,14 @@ public class Body implements Serializable {
     private Integer numberOfDoors;
     @Column(name = "additionalinfo")
     private String additionalInfo;
+    /**
+     * '@JoinColumn(name = "id")' by default hibernate would look for 'car_id' column not 'id' in car table
+     * '@MapsId' with this Body ID will be FK and PK together based on Car ID
+     */
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")//by default hibernate would look for 'car_id' column not 'id'
-    @MapsId//with this Body ID will be FK and PK together based on Car ID
+    @JoinColumn(name = "id")
+    @MapsId
     private Car car;
 
 }
