@@ -19,12 +19,12 @@ import java.io.Serializable;
 public class Body implements Serializable {
     //no @GeneratedValue annotation because this ID is also FK for Car table
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "carbody_id_seq")
-    @SequenceGenerator(name = "carbody_id_seq", sequenceName = "carbody_id_seq", allocationSize = 1)
     private Long id;
-    @Transient //todo remove soon
+    @Enumerated
+    @Column(columnDefinition = "smallint", name = "bodycolor")
     private Color bodyColor;
-    @Transient //todo remove soon
+    @Enumerated
+    @Column(columnDefinition = "smallint", name = "bodytype")
     private BodyType bodyType;
     @NotNull
     @Column(name = "numberofdoors")// nullable = false works only when hibernate creates table!
@@ -32,7 +32,9 @@ public class Body implements Serializable {
     @Column(name = "additionalinfo")
     private String additionalInfo;
     @JsonIgnore
-    @OneToOne(mappedBy = "body")//mappedBy - dependent side notation
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")//by default hibernate would look for 'car_id' column not 'id'
+    @MapsId//with this Body ID will be FK and PK together based on Car ID
     private Car car;
 
 }

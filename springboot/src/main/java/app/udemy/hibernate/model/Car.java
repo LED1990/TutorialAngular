@@ -33,13 +33,11 @@ public class Car implements Serializable {
     private Set<Wheel> wheels;// will be one to many
 
     /*
-    @JoinColumn - says that this is paren entity
-    entities mapped this way should be used for required relations. If no body object exists in Car than NULL will be saved to DB
-    to prevent null values if relation is not requierd JoinTable may be used
+   this with @MapsId on child side doesnt require null values in Fk because child's FK and PK are shared
+   if optional is set to true I cans save car without body
      */
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "body_id")
+    @OneToOne(mappedBy = "car", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     private Body body;//will be one to one
 //    @Basic //allows to declare fetching strategy. All simple fields by default are EAGER
     private String info;//fields without annotation are persisted anyway with @Basic annotation! only @Transient are omitted

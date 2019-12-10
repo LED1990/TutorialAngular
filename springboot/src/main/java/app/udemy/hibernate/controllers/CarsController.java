@@ -3,6 +3,7 @@ package app.udemy.hibernate.controllers;
 import app.udemy.hibernate.dao.interfaces.CarDao;
 import app.udemy.hibernate.model.Body;
 import app.udemy.hibernate.model.Car;
+import app.udemy.hibernate.model.enums.BodyType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,11 +54,14 @@ public class CarsController {
         newCarMock.setDriverName("driver name");
         newCarMock.setInfo("car info");
         newCarMock.setName("AUDI");
+        newCarMock.setId(1L);//ID will be calculated by sequence correctly
 
         Body mockBody = new Body();
         mockBody.setAdditionalInfo("body info");
         mockBody.setNumberOfDoors(5);
+        mockBody.setBodyType(BodyType.SEDAN);
 
+        mockBody.setCar(newCarMock);
         newCarMock.setBody(mockBody);
         return newCarMock;
     }
