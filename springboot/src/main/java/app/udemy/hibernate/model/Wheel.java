@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 
 @Entity
@@ -32,7 +33,9 @@ public class Wheel implements Serializable {
 
     /**
      *  before persisting ID is null, after persisting ID is not null so HasCode is different and entity cannot be found
-     *  this is why HasCode is returning const val. we are using ID to define entities equality
+     *  this is why HasCode is returning const val. we are using ID to define entities equality but ID is assigned during flush
+     *  override hascode like this if using database generated ID. When naturalID are used hasCode should be implemented for example like this: return Objects.hash(getIsbn()); because it is known from the beginning
+     *  not like ID which is known after flushing
      * @return return
      */
     @Override

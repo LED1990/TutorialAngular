@@ -57,7 +57,7 @@ public class CarsController {
     @PutMapping("/addcar/persist/jpabatch")
     public String persistMultipleCarsWithJpaBatching() {
         List<Car> toSave = new ArrayList<>();
-        for (int i = 0; i < 1000000; i++){
+        for (int i = 0; i < 10; i++){
             toSave.add(mockNewCar(i));
         }
         carDao.saveMultipleCarsJpa(toSave);
