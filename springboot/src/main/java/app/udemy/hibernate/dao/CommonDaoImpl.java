@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Setter
 public abstract class CommonDaoImpl<T> {
@@ -59,6 +60,13 @@ public abstract class CommonDaoImpl<T> {
         return getHibernateSession().find(clazz, id);
     }
 
+    void persistWithBatch(List<T> entities){
+        entityManager.unwrap(Session.class).setJdbcBatchSize(30);//batch size added like this will only affect this session
+        for (T element: entities
+        ) {
+            entityManager.persist(element);
+        }
+    }
     private Session getHibernateSession() {
         return entityManager.unwrap(Session.class);
     }

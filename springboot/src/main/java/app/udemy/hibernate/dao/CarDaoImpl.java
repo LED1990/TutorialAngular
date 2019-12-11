@@ -2,12 +2,17 @@ package app.udemy.hibernate.dao;
 
 import app.udemy.hibernate.dao.interfaces.CarDao;
 import app.udemy.hibernate.model.Car;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class CarDaoImpl extends CommonDaoImpl<Car> implements CarDao {
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
      * with @Transactonal spring handles transaction (creating, commiting etc.) without it I have to handle transaction
      * under the hood using JPA EntityManager
@@ -50,4 +55,12 @@ public class CarDaoImpl extends CommonDaoImpl<Car> implements CarDao {
     public Car getCarById(Long id) {
         return getById(id, Car.class);
     }
+
+    @Transactional
+    @Override
+    public void saveMultipleCarsJpa(List<Car> carsToSave) {
+        persistWithBatch(carsToSave);
+    }
+
+
 }
