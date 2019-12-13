@@ -10,7 +10,7 @@ import { MessagesComponent } from './fundamentals/messages/messages.component';
 import { FundamentalsRoutingModule } from './fundamentals/routes/fundamentals-routing.module';
 import { DashboardComponent } from './fundamentals/dashboard/dashboard.component';
 import {HttpClientModule} from "@angular/common/http";
-import {MenuComponent} from "./notatki/menu/menu.component";
+import {MenuComponent} from "./notatki/components/menu.component";
 import {MaterialModule} from "./material/material.module";
 import {MatFormFieldModule, MatSelectModule, MatSidenavModule} from "@angular/material";
 
