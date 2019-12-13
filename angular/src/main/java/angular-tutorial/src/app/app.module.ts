@@ -10,6 +10,9 @@ import { MessagesComponent } from './fundamentals/messages/messages.component';
 import { FundamentalsRoutingModule } from './fundamentals/routes/fundamentals-routing.module';
 import { DashboardComponent } from './fundamentals/dashboard/dashboard.component';
 import {HttpClientModule} from "@angular/common/http";
+import {MenuComponent} from "./notatki/menu/menu.component";
+import {MaterialModule} from "./material/material.module";
+import {MatFormFieldModule, MatSelectModule, MatSidenavModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -17,14 +20,20 @@ import {HttpClientModule} from "@angular/common/http";
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     FundamentalsRoutingModule,
-    HttpClientModule//added here is available for everybody
+    HttpClientModule,
+    MaterialModule,
+    MatSidenavModule,
+    MatFormFieldModule,
+    MatSelectModule,
+//added here is available for everybody
   ],
   providers: [],
   bootstrap: [AppComponent]

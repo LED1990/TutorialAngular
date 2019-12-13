@@ -1,0 +1,46 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button class="mat-button" (click)="drawer.toggle()">
+      <span>
+        <mat-icon role="img" aria-hidden="true">
+          <svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+          </svg>
+        </mat-icon>
+      </span>
+    </button>
+
+    <img src="../../../assets/logo.png" title="logo" width="150" height="40" alt="logo" style="margin-left: 10px;">
+
+    <ul>
+      <li>
+        <a>
+          <span>NOTES</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <span>NOTHING YET</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <span>NOTHING YET</span>
+        </a>
+      </li>
+    </ul>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container class="example-container" style="height: 500px"> <!-- REMEBER to remove this fixed style -->
+  <mat-drawer mode="side" #drawer>
+    <button class="new-note-button">ADD NEW NOTE</button>
+    <div class="side-nav-container">
+
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-label>Sidenav mode</mat-label>
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
