@@ -49,18 +49,6 @@ mat-drawer-content {
   align-items: flex-start;
 }
 
-.new-note-button{
-  height: 64px;
-  color: white;
-  background-color: #1976d2;
-  border: none;
-  cursor: pointer;
-  margin: 3px;
-}
-
-.new-note-button:hover{
-  background-color: #336699;
-}
 .side-nav-container{
   width: 100%;
   height: 100%;

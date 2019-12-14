@@ -9,9 +9,7 @@
         </mat-icon>
       </span>
     </button>
-
     <img src="../../../assets/logo.png" title="logo" width="150" height="40" alt="logo" style="margin-left: 10px;">
-
     <ul>
       <li>
         <a>
@@ -33,13 +31,40 @@
 </mat-toolbar>
 <mat-drawer-container class="example-container" style="height: 500px"> <!-- REMEBER to remove this fixed style -->
   <mat-drawer mode="side" #drawer>
-    <button class="new-note-button">ADD NEW NOTE</button>
     <div class="side-nav-container">
-
+      <mat-panel-description>
+        <mat-panel-description>
+          Introduction
+        </mat-panel-description>
+      </mat-panel-description>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            HIBERNATE
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>nothing yet.</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            SPRING
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>mothing yet.</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header >
+          <mat-panel-description>
+            ANGULAR
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>nothing yet.</p>
+      </mat-expansion-panel>
     </div>
   </mat-drawer>
   <mat-drawer-content>
-    <mat-label>Sidenav mode</mat-label>
+    <app-introduction></app-introduction>
 
   </mat-drawer-content>
 </mat-drawer-container>
