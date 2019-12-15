@@ -14,7 +14,8 @@ import {MenuComponent} from "./notatki/components/menu.component";
 import {MaterialModule} from "./material/material.module";
 import {IntroductionComponent} from './notatki/components/introduction/introduction.component';
 import {NewNoteDialogComponent} from "./notatki/components/introduction/new-note-dialog/new-note-dialog.component";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NoteRoutesModule} from "./notatki/routes/note-routes.module";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    NoteRoutesModule,
 
 //added here is available for everybody
   ],

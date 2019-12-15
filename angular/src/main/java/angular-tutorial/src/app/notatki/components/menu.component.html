@@ -32,9 +32,9 @@
 <mat-drawer-container class="example-container" style="height: 500px"> <!-- REMEBER to remove this fixed style -->
   <mat-drawer mode="side" #drawer>
     <div class="side-nav-container">
-      <mat-panel-description>
+      <mat-panel-description class="introduction-link">
         <mat-panel-description>
-          Introduction
+          <a routerLink="/intro"> Introduction </a>
         </mat-panel-description>
       </mat-panel-description>
       <mat-expansion-panel>
@@ -43,7 +43,9 @@
             HIBERNATE
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>nothing yet.</p>
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let link of getHibernateNotes()" [routerLink]=""> {{ link.noteTopik }} </a>
+        </mat-nav-list>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -51,7 +53,9 @@
             SPRING
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>mothing yet.</p>
+        <mat-nav-list>
+          <a mat-list-item href="" *ngFor="let link of getSpringNotes()"> {{ link.noteTopik }} </a>
+        </mat-nav-list>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header >
@@ -59,12 +63,14 @@
             ANGULAR
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>nothing yet.</p>
+        <mat-nav-list>
+          <a mat-list-item href="" *ngFor="let link of getAngularNotes()"> {{ link.noteTopik }} </a>
+        </mat-nav-list>
       </mat-expansion-panel>
     </div>
   </mat-drawer>
   <mat-drawer-content>
-    <app-introduction></app-introduction>
+    <app-introduction (newNote)="onNewNote($event)"></app-introduction>
 
   </mat-drawer-content>
 </mat-drawer-container>

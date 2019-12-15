@@ -6,7 +6,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInput,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatMenuModule,
   MatSelectModule,
   MatSidenavModule,
@@ -27,6 +27,7 @@ import {NewNoteDialogComponent} from "../notatki/components/introduction/new-not
     BrowserAnimationsModule,
     MatDialogModule,
     MatInputModule,
+    MatListModule,
   ],
   exports: [
     MatButtonModule,
@@ -41,6 +42,7 @@ import {NewNoteDialogComponent} from "../notatki/components/introduction/new-not
     MatExpansionModule,
     MatDialogModule,
     MatInput,
+    MatListModule,
   ],
   providers: [
     MatDialogModule,

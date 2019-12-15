@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Note} from "../../model/note";
 import {MatDialog} from '@angular/material/dialog';
 import {NewNoteDialogComponent} from "./new-note-dialog/new-note-dialog.component";
+
 
 
 @Component({
@@ -12,6 +13,7 @@ import {NewNoteDialogComponent} from "./new-note-dialog/new-note-dialog.componen
 export class IntroductionComponent implements OnInit {
 
   note: Note;
+  @Output() newNote = new EventEmitter<Note>();
 
   constructor(private dialog: MatDialog) {
   }
@@ -20,13 +22,16 @@ export class IntroductionComponent implements OnInit {
   }
 
   openDialog() {
-    console.log("Opening notes dialog");
+    console.log("Opening notesapp dialog");
 
-    const dialogRef = this.dialog.open(NewNoteDialogComponent, {data: {passedNote: this.note}});
+    const dialogRef = this.dialog.open(NewNoteDialogComponent, {data: {passedNote: this.note}, minWidth:'600px'});
     dialogRef.afterClosed().subscribe(result => {
-      console.log("data from new note dialog");
+      console.log("data from new note dialog");//todo replace with common messaging
       console.log(result);
-      this.note = result;
+      if (result !== undefined){
+        this.newNote.emit(result);
+        console.log("new note emitted")
+      }
     });
   }
 }
