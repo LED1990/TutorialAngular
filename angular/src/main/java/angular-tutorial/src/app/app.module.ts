@@ -16,6 +16,7 @@ import {IntroductionComponent} from './notatki/components/introduction/introduct
 import {NewNoteDialogComponent} from "./notatki/components/introduction/new-note-dialog/new-note-dialog.component";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoteRoutesModule} from "./notatki/routes/note-routes.module";
+import { NoteComponent } from './notatki/components/note/note.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {NoteRoutesModule} from "./notatki/routes/note-routes.module";
     MenuComponent,
     NewNoteDialogComponent,
     IntroductionComponent,
+    NoteComponent,
   ],
   imports: [
     BrowserModule,

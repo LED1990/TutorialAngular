@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Note} from "../../model/note";
 import {MatDialog} from '@angular/material/dialog';
 import {NewNoteDialogComponent} from "./new-note-dialog/new-note-dialog.component";
+import {NewNoteService} from "../../services/new-note-service";
 
 
 
@@ -15,7 +16,7 @@ export class IntroductionComponent implements OnInit {
   note: Note;
   @Output() newNote = new EventEmitter<Note>();
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private data: NewNoteService) {
   }
 
   ngOnInit() {
@@ -29,7 +30,7 @@ export class IntroductionComponent implements OnInit {
       console.log("data from new note dialog");//todo replace with common messaging
       console.log(result);
       if (result !== undefined){
-        this.newNote.emit(result);
+        this.data.changeMessage(result);
         console.log("new note emitted")
       }
     });

@@ -1,20 +1,26 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Note} from "../model/note";
 import {NoteServiceService} from "../services/note-service.service";
+import {NewNoteService} from "../services/new-note-service";
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit{
 
   listOfNotes: Note[] = [];
 
-  constructor(private noteService: NoteServiceService) {
+  constructor(private noteService: NoteServiceService, private data: NewNoteService) {
   }
 
   ngOnInit() {
+    this.data.currentMsg.subscribe(value => {
+      if (value !== undefined){
+        this.onNewNote(value)
+      }
+    });
     this.noteService.getNotes().subscribe(value => {
       for (let val of value){
         this.listOfNotes.push(val);
