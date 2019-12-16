@@ -17,7 +17,7 @@ export class NewNoteDialogComponent implements OnInit {
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<NewNoteDialogComponent>) { }
   noteForm = this.fb.group({
     noteType: [''],
-    noteTopik: [''],
+    noteTopic: [''],
     noteText: ['']
   });
 

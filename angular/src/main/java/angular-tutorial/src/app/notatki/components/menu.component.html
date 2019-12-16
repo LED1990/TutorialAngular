@@ -44,7 +44,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-list-item *ngFor="let link of getHibernateNotes()" [routerLink]=""> {{ link.noteTopik }} </a>
+          <a mat-list-item href="" *ngFor="let link of getHibernateNotes()" > {{ link.noteTopic }} </a>
         </mat-nav-list>
       </mat-expansion-panel>
       <mat-expansion-panel>
@@ -54,7 +54,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-list-item href="" *ngFor="let link of getSpringNotes()"> {{ link.noteTopik }} </a>
+          <a mat-list-item href="" *ngFor="let link of getSpringNotes()"> {{ link.noteTopic }} </a>
         </mat-nav-list>
       </mat-expansion-panel>
       <mat-expansion-panel>
@@ -64,7 +64,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-list-item href="" *ngFor="let link of getAngularNotes()"> {{ link.noteTopik }} </a>
+          <a mat-list-item href="" *ngFor="let link of getAngularNotes()"> {{ link.noteTopic }} </a>
         </mat-nav-list>
       </mat-expansion-panel>
     </div>
