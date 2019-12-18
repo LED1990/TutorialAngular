@@ -1,9 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Note} from "../../model/note";
 import {MatDialog} from '@angular/material/dialog';
 import {NewNoteDialogComponent} from "./new-note-dialog/new-note-dialog.component";
 import {NewNoteService} from "../../services/new-note-service";
-
+import {MessagesAndLogsService} from "../../services/messages-and-logs.service";
 
 
 @Component({
@@ -14,24 +14,23 @@ import {NewNoteService} from "../../services/new-note-service";
 export class IntroductionComponent implements OnInit {
 
   note: Note;
-  @Output() newNote = new EventEmitter<Note>();
-
-  constructor(private dialog: MatDialog, private data: NewNoteService) {
+  constructor(private dialog: MatDialog,
+              private data: NewNoteService,
+              private msg: MessagesAndLogsService) {
   }
 
   ngOnInit() {
+    this.msg.logAndAddMsessage([], '[IntroductionComponent] init()');
   }
 
   openDialog() {
-    console.log("Opening notesapp dialog");
-
+    this.msg.logAndAddMsessage([], '[IntroductionComponent] opening new note dialog');
     const dialogRef = this.dialog.open(NewNoteDialogComponent, {data: {passedNote: this.note}, minWidth:'600px'});
     dialogRef.afterClosed().subscribe(result => {
-      console.log("data from new note dialog");//todo replace with common messaging
-      console.log(result);
+      this.msg.logAndAddMsessage([], '[IntroductionComponent] new note dialog closed checking if new note must be emitted');
       if (result !== undefined){
         this.data.changeMessage(result);
-        console.log("new note emitted")
+        this.msg.logAndAddMsessage([result], '[IntroductionComponent] new note dialog closed adding new note emitted');
       }
     });
   }

@@ -17,6 +17,7 @@ import {NewNoteDialogComponent} from "./notatki/components/introduction/new-note
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoteRoutesModule} from "./notatki/routes/note-routes.module";
 import { NoteComponent } from './notatki/components/note/note.component';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,12 @@ import { NoteComponent } from './notatki/components/note/note.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NoteRoutesModule,
+    LoggerModule.forRoot({
+      // serverLoggingUrl: '/api/logs', //this may be endpoint to server with logs - elasticsearch?
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.ERROR,
+      disableConsoleLogging: false
+    })
 
 //added here is available for everybody
   ],

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Note} from "../../model/note";
 import {NoteServiceService} from "../../services/note-service.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {MessagesAndLogsService} from "../../services/messages-and-logs.service";
 
 @Component({
   selector: 'app-note',
@@ -13,19 +14,21 @@ export class NoteComponent implements OnInit {
   currentNote: Note;
   imageBlob: string | ArrayBuffer = null;
 
-  constructor(private noteService: NoteServiceService, private route: ActivatedRoute, private router: Router) {
+  constructor(private noteService: NoteServiceService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private msg: MessagesAndLogsService) {
     this.checkEvent(this.router);
   }
 
   ngOnInit() {
-    this.getNoteFromService();
-    this.getNoteImageFromService();
+    this.msg.logAndAddMsessage([], '[NoteComponent] init()');
   }
 
   private checkEvent(router: Router) {
-    console.log("event event event");
     router.events.subscribe(value => {
       if (value instanceof NavigationEnd) {
+        this.msg.logAndAddMsessage([], '[NoteComponent] opening existing note');
         this.getNoteFromService();
         this.getNoteImageFromService();
       }
@@ -34,29 +37,31 @@ export class NoteComponent implements OnInit {
 
   private getNoteFromService() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.noteService.getNoteById(id).subscribe(value => this.currentNote = value);
+    this.noteService.getNoteById(id).subscribe(value => {
+      this.msg.logAndAddMsessage([value], '[NoteComponent] note downloaded from server');
+      this.currentNote = value
+    });
   }
 
   private getNoteImageFromService() {
-    console.log("getting note with image!");
     const id = +this.route.snapshot.paramMap.get('id');
     this.noteService.getNoteImage(id).subscribe(value => {
-      console.log("recieved blob");
-      console.log(value);
-      this.blobToImage(value)},
-        error1 => console.log(error1));
+      this.msg.logAndAddMsessage([value], '[NoteComponent] notes image downloaded form server');
+      this.blobToImage(value)
+    });
   }
 
   private blobToImage(image: Blob) {
-    if (image.size >0){
+    if (image.size > 0) {
+      this.msg.logAndAddMsessage([], '[NoteComponent] converting image');
       let reader = new FileReader();
       reader.addEventListener("load", () => this.imageBlob = reader.result);
-      if (image){
-        console.log("recieved image");
-        console.log(image);
+      if (image) {
+        this.msg.logAndAddMsessage([], '[NoteComponent] image converted');
         reader.readAsDataURL(image);
       }
-    }else {
+    } else {
+      this.msg.logAndAddMsessage([], '[NoteComponent] notes doesnt have image');
       this.imageBlob = undefined;
     }
   }

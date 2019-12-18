@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {NGXLogger} from "ngx-logger";
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +8,19 @@ export class MessagesAndLogsService {
 
   msgArray: string[] = [];
 
-  constructor() {
+  constructor(private logger: NGXLogger){
   }
 
-  logAndAddMsessage(msg: string) {
-    console.debug(msg);
-    this.msgArray.push(msg);
+  /**
+   * msg[0] - class name
+   * msg[1] - message
+   * @param params
+   * @param msg
+   */
+  logAndAddMsessage(params: any[], ...msg: string[]) {
+    this.logger.debug(msg, params);
+    this.msgArray.push(msg[0]);
+    this.logger.debug('current messages: ', this.msgArray);
     if (this.msgArray.length > 30) {
       this.msgArray.length = 0;
     }

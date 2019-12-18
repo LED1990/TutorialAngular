@@ -11,22 +11,23 @@ import {MessagesAndLogsService} from "../services/messages-and-logs.service";
 })
 export class MenuComponent implements OnInit{
 
-  listOfNotes: Note[] = [];
+  private listOfNotes: Note[] = [];
 
-  constructor(public msg: MessagesAndLogsService,
+  constructor(private msg: MessagesAndLogsService,
               private noteService: NoteServiceService,
               private data: NewNoteService) {
   }
 
   ngOnInit() {
+    this.msg.logAndAddMsessage([], '[MenuComponent] init()');
     this.data.currentMsg.subscribe(value => {
       if (value !== undefined){
-        
+        this.msg.logAndAddMsessage([value], '[MenuComponent] saving note without IMAGE');
         this.onNewNote(value)
       }
     });
     this.noteService.getNotes().subscribe(value => {
-      console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      this.msg.logAndAddMsessage([value], '[MenuComponent] getting all notes from server (without img and text)');
       for (let val of value){
         this.listOfNotes.push(val);
       }
@@ -34,16 +35,15 @@ export class MenuComponent implements OnInit{
   }
 
   onNewNote(note: Note) {
-    console.log("new note received");//todo change to logger
-    console.log(note);
     if (note.id !== undefined){
-      console.log("AAAA1111111111111");
+      this.msg.logAndAddMsessage([note.id], '[MenuComponent] adding new note - note has ID');
       this.listOfNotes.push(note);
     } else {
-      console.log("AAAA222222222222");
-      this.noteService.saveNewNote(note).subscribe(value => this.listOfNotes.push(value));
+      this.msg.logAndAddMsessage([], '[MenuComponent] saving new note');
+      this.noteService.saveNewNote(note).subscribe(value => {
+        this.msg.logAndAddMsessage([value], '[MenuComponent] new note saved');
+        this.listOfNotes.push(value)});
     }
-    //todo some error logging
   }
 
   getHibernateNotes(): Note[]{//todo change to pipe
