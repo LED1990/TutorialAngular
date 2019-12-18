@@ -1,0 +1,10 @@
+.note-conatiner{
+  width: 100%;
+  display: flex;
+}
+.note-image-container{
+  width: 60%;
+}
+.note-text-container{
+  width: 40%;
+}

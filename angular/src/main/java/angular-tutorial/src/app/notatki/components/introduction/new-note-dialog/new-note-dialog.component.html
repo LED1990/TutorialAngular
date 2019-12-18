@@ -1,7 +1,16 @@
-
 <h1 mat-dialog-title>New note dialog</h1>
 <div mat-dialog-content>
   <p>Here you can add new note. All fields are required!</p>
+
+  <input id="inputfile" #inputfile type="file" (change)="onFileChange($event)" style="display: none"
+         accept="image/png">
+  <button mat-button (click)="inputfile.click()">Add image</button>
+  <div *ngIf="selectedFile">
+    {{selectedFile.name}}
+    <span>
+      <button mat-button (click)="removeFile()">Remove</button>
+    </span>
+  </div>
 
   <form [formGroup]="noteForm" class="new-note-form" (ngSubmit)="onSubmit()">
     <mat-form-field>
@@ -11,7 +20,6 @@
           {{val}}
         </mat-option>
       </mat-select>
-
     </mat-form-field>
 
     <mat-form-field>
@@ -23,7 +31,6 @@
     <mat-form-field>
       <label>
         <textarea matInput placeholder="Note text" formControlName="noteText" required></textarea>
-        <!--        <input matInput placeholder="Note text" formControlName="noteText" required>-->
       </label>
     </mat-form-field>
     <div mat-dialog-actions class="note-dialog-buttons">
