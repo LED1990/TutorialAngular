@@ -12,8 +12,7 @@ export class MessagesAndLogsService {
   }
 
   /**
-   * msg[0] - class name
-   * msg[1] - message
+   * msg[0] - message
    * @param params
    * @param msg
    */
@@ -25,4 +24,5 @@ export class MessagesAndLogsService {
       this.msgArray.length = 0;
     }
   }
+  //TODO NAGULAR HTTP AND SUBSRIBE ERROR HANDLING!!!!!!!!!!!!!!!!!!!!!
 }

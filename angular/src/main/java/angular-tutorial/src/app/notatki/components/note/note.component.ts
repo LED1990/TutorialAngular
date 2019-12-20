@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Note} from "../../model/note";
-import {NoteServiceService} from "../../services/note-service.service";
+import {NoteService} from "../../services/note.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {MessagesAndLogsService} from "../../services/messages-and-logs.service";
 
@@ -14,7 +14,7 @@ export class NoteComponent implements OnInit {
   currentNote: Note;
   imageBlob: string | ArrayBuffer = null;
 
-  constructor(private noteService: NoteServiceService,
+  constructor(private noteService: NoteService,
               private route: ActivatedRoute,
               private router: Router,
               private msg: MessagesAndLogsService) {

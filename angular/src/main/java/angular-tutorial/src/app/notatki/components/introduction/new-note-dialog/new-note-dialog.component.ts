@@ -3,7 +3,7 @@ import {MatDialogRef} from "@angular/material";
 import {Note} from "../../../model/note";
 import {FormBuilder} from "@angular/forms";
 import {NoteType} from "../../../model/enums/note-type.enum";
-import {NoteServiceService} from "../../../services/note-service.service";
+import {NoteService} from "../../../services/note.service";
 import {MessagesAndLogsService} from "../../../services/messages-and-logs.service";
 
 @Component({
@@ -19,7 +19,7 @@ export class NewNoteDialogComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<NewNoteDialogComponent>,
-              private noteService: NoteServiceService,
+              private noteService: NoteService,
               private msg: MessagesAndLogsService) {
   }
 

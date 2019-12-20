@@ -7,7 +7,7 @@ import {MessagesAndLogsService} from "./messages-and-logs.service";
 @Injectable({
   providedIn: 'root'
 })
-export class NoteServiceService {
+export class NoteService {
 
   private noteUrl = 'http://localhost:9093/api/notes';//todo later change in config so all request would go to springboot app
 
@@ -20,19 +20,19 @@ export class NoteServiceService {
   }
 
   saveNewNote(note: Note): Observable<Note> {
-    this.msg.logAndAddMsessage([note], '[NoteServiceService] sending new note to server');
+    this.msg.logAndAddMsessage([note], '[NoteService] sending new note to server');
     const url = this.noteUrl + '/new';
     return this.httpClient.put<Note>(url, note, this.httpOptions);
   }
 
   getNotes(): Observable<Note[]> {
-    this.msg.logAndAddMsessage([], '[NoteServiceService] getting all notes from server');
+    this.msg.logAndAddMsessage([], '[NoteService] getting all notes from server');
     const url = this.noteUrl + '/getall';
     return this.httpClient.get<Note[]>(url, this.httpOptions);
   }
 
   getNoteById(id: number): Observable<Note> {
-    this.msg.logAndAddMsessage([id], '[NoteServiceService] getting note by ID from server');
+    this.msg.logAndAddMsessage([id], '[NoteService] getting note by ID from server');
     const url = this.noteUrl + '/note';
     const params = new HttpParams()
       .set('id', String(id));
@@ -40,7 +40,7 @@ export class NoteServiceService {
   }
 
   saveNoteImage(formData: FormData): Promise<Note> {
-    this.msg.logAndAddMsessage([], '[NoteServiceService] sending new image to server');
+    this.msg.logAndAddMsessage([], '[NoteService] sending new image to server');
     const opt = {
       headers: new HttpHeaders({})
     };
@@ -49,7 +49,7 @@ export class NoteServiceService {
   }
 
   getNoteImage(id: number): Observable<Blob> {
-    this.msg.logAndAddMsessage([], '[NoteServiceService] getting image from server');
+    this.msg.logAndAddMsessage([], '[NoteService] getting image from server');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
