@@ -7,10 +7,8 @@ import {APP_BASE_HREF} from "@angular/common";
 import {MaterialModule} from "../../material/material.module";
 import {AppModule} from "../../app.module";
 import {NoteService} from "../services/note.service";
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {of} from "rxjs/internal/observable/of";
 import {NewNoteService} from "../services/new-note-service";
+import {MockNoteService} from "../model/mocks/mock-note-service";
 
 
 describe('MenuComponent', () => {
@@ -18,6 +16,11 @@ describe('MenuComponent', () => {
   let fixture: ComponentFixture<MenuComponent>;
   let comp: MenuComponent;
   let newNoteSpy: NewNoteService;
+  let mockNoteService: MockNoteService;
+
+  beforeAll(async(() => {
+    mockNoteService = new MockNoteService();
+  }));
 
   beforeEach(async(() => {
       TestBed.configureTestingModule({
@@ -33,10 +36,10 @@ describe('MenuComponent', () => {
       }).compileComponents().then(() => {
         fixture = TestBed.createComponent(MenuComponent);
         comp = fixture.componentInstance;//getting instance for every test
-        comp.listOfNotes = getMockNotes();
+        comp.listOfNotes = mockNoteService.getMockNotes();
 
 
-        newNoteSpy = jasmine.createSpyObj('NewNoteService',['changeMessage']);
+        newNoteSpy = jasmine.createSpyObj('NewNoteService', ['changeMessage']);
       });
 
     }
@@ -77,45 +80,9 @@ describe('MenuComponent', () => {
 
   it('should get notes from external service within ngOnInit()', async(() => {
     expect(comp.listOfNotes.length == 10).toBeTruthy();
-    let resultArray = getMockNotes();
+    let resultArray = mockNoteService.getMockNotes();
     for (let i = 0; i < 10; i++) {
       expect(resultArray[i] === comp.listOfNotes[i]);
     }
   }));
 });
-
-@Injectable({
-  providedIn: 'root'
-})
-export class MockNoteService {
-  saveNewNote(note: Note): Observable<Note> {
-    note.id = 100;
-    return of(note);
-  }
-
-  getNotes(): Observable<Note[]> {
-    let notes = getMockNotes();
-    return of(notes);
-  }
-}
-
-function getMockNotes(): Note[] {
-  let notes: Note[] = [];
-  for (let i = 0; i < 10; i++) {
-    let note = new Note();
-    note.id = i;
-    note.noteText = 'text ' + i;
-    note.noteTopic = 'topic ' + i;
-    if (i < 3) {
-      note.noteType = NoteType.HIBERNATE;
-    }
-    if (i >= 3 && i < 7) {
-      note.noteType = NoteType.ANGULAR;
-    }
-    if (i > 6) {
-      note.noteType = NoteType.SPRING;
-    }
-    notes.push(note);
-  }
-  return notes;
-}

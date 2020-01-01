@@ -11,8 +11,8 @@ import {MessagesAndLogsService} from "../../services/messages-and-logs.service";
 })
 export class NoteComponent implements OnInit {
 
-  currentNote: Note;
-  imageBlob: string | ArrayBuffer = null;
+  private _currentNote: Note;
+  private _imageBlob: string | ArrayBuffer = null;
 
   constructor(private noteService: NoteService,
               private route: ActivatedRoute,
@@ -39,7 +39,7 @@ export class NoteComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.noteService.getNoteById(id).subscribe(value => {
       this.msg.logAndAddMsessage([value], '[NoteComponent] note downloaded from server');
-      this.currentNote = value
+      this._currentNote = value
     });
   }
 
@@ -55,14 +55,23 @@ export class NoteComponent implements OnInit {
     if (image.size > 0) {
       this.msg.logAndAddMsessage([], '[NoteComponent] converting image');
       let reader = new FileReader();
-      reader.addEventListener("load", () => this.imageBlob = reader.result);
+      reader.addEventListener("load", () => this._imageBlob = reader.result);
       if (image) {
         this.msg.logAndAddMsessage([], '[NoteComponent] image converted');
         reader.readAsDataURL(image);
       }
     } else {
       this.msg.logAndAddMsessage([], '[NoteComponent] notes doesnt have image');
-      this.imageBlob = undefined;
+      this._imageBlob = undefined;
     }
+  }
+
+
+  get currentNote(): Note {
+    return this._currentNote;
+  }
+
+  get imageBlob(): string | ArrayBuffer {
+    return this._imageBlob;
   }
 }

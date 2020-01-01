@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from "@angular/material";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {Note} from "../../../model/note";
 import {FormBuilder} from "@angular/forms";
 import {NoteType} from "../../../model/enums/note-type.enum";
@@ -18,6 +18,7 @@ export class NewNoteDialogComponent implements OnInit {
   selectedFile: File = null;
 
   constructor(private fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any,
               private dialogRef: MatDialogRef<NewNoteDialogComponent>,
               private noteService: NoteService,
               private msg: MessagesAndLogsService) {
