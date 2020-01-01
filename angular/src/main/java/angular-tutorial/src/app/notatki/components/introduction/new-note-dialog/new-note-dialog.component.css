@@ -1,0 +1,20 @@
+form {
+  display: grid;
+}
+
+.note-dialog-buttons{
+  display: grid;
+  margin: 0;
+}
+.note-save-button{
+  background-color: lightgreen;
+  margin-bottom: 2px;
+}
+.note-cancel-button{
+  background-color: lightgray;
+}
+
+.mat-dialog-actions .mat-button-base+.mat-button-base{
+  margin: 0;
+}
+

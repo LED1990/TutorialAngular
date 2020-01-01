@@ -1,0 +1,12 @@
+.new-note-button{
+  height: 64px;
+  color: white;
+  background-color: #1976d2;
+  border: none;
+  cursor: pointer;
+  margin: 3px;
+}
+
+.new-note-button:hover{
+  background-color: #336699;
+}

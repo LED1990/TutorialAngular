@@ -1,0 +1,18 @@
+<div class="note-conatiner">
+  <h1 *ngIf="!currentNote">Note not found</h1>
+
+  <div *ngIf="currentNote" class="note-text-container">
+    <h2>Category: {{currentNote.noteType}}</h2>
+    <h2>Subject: {{currentNote.noteTopic}}</h2>
+    <h3>{{currentNote.noteText}}</h3>
+  </div>
+
+
+  <div *ngIf="imageBlob" class="note-image-container">
+    <img [src]="imageBlob">
+  </div>
+
+</div>
+
+
+

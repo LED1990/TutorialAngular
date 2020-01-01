@@ -1,3 +1,58 @@
 server:
   port: 9093
 #  port jenkins!! 8099
+
+logging:
+  level:
+    root: error
+    org:
+      springframework: info
+    app: info
+
+spring:
+  datasource:
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
+  profiles:
+    active: @active.profile@
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+#          batch_size: 5 #batch size here would affect every entitymanager
+          order_inserts: true
+          order_updates: true
+          batch_versioned_data: true
+          new_generator_mappings: true
+          reWriteBatchedInserts: true
+---
+spring:
+  profiles: "dev"
+logging:
+  level:
+    app.udemy: debug
+---
+spring:
+  profiles: "udemyHibernate"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/udemyHibernate
+    username: udemy
+    password: udemy1664
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+logging:
+  level:
+    app.udemy: debug
+    org:
+      springframework:
+        transaction:
+          interceptor: trace
+      hibernate:
+        engine:
+          jdbc:
+            batch:
+              internal:
+                BatchingBatch: debug #to log if batching is working
