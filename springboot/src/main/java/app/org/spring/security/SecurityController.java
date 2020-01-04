@@ -13,4 +13,9 @@ public class SecurityController {
     public ResponseEntity<String> getHello(){
         return ResponseEntity.ok("simple hello");
     }
+
+    @GetMapping("/api/security/basic")
+    public ResponseEntity<String> basicAuth(){
+        return ResponseEntity.ok(null);
+    }
 }

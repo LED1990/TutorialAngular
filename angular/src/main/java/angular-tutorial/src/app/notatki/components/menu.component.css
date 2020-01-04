@@ -114,5 +114,14 @@ mat-nav-list a:hover {
   color: #039be5;
 }
 
+.bar-links{
+  color: white;
+  text-decoration: none;
+}
+
+.bar-links:hover{
+  color: #aaaaaa;
+}
+
 
 

@@ -1,0 +1,12 @@
+.security-buttons{
+  width: 150px;
+  height: 150px;
+  background-color: #1976d2;
+  color: white;
+  font-size: larger;
+}
+.security-buttons:hover{
+  background-color: lightgray;
+  cursor: pointer;
+  color: black;
+}
