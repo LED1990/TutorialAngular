@@ -21,12 +21,9 @@ export class MenuComponent implements OnInit{
   ngOnInit() {
     this.msg.logAndAddMsessage([], '[MenuComponent] init()');
     this.data.currentMsg.subscribe(value => {
-      console.log("==================ABCDEF===============")
       if (value !== undefined){
         this.msg.logAndAddMsessage([value], '[MenuComponent] saving note without IMAGE');
         this.onNewNote(value)
-      }else {
-        console.log("==================123456===============")
       }
     });
     this._noteService.getNotes().subscribe(value => {
@@ -49,7 +46,7 @@ export class MenuComponent implements OnInit{
     }
   }
 
-  getHibernateNotes(): Note[]{//todo change to pipe
+  getHibernateNotes(): Note[]{
     return this._listOfNotes.filter(value => value.noteType == "HIBERNATE");
   }
   getSpringNotes(): Note[]{

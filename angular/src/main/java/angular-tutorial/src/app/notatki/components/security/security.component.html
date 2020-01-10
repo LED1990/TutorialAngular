@@ -1,0 +1,48 @@
+<h1>Spring security and angular testing component</h1>
+
+<div class="login-container">
+  <div class="login-form-container">
+    <h2 *ngIf="status" [ngClass]="status.indexOf('IN') === -1 ? 'failed':'success'">Status: {{status}}</h2>
+    <form [formGroup]="loginForm" class="security-form" (ngSubmit)="basicAuth()">
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="Login" formControlName="login" required>
+        </label>
+      </mat-form-field>
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="Password" formControlName="password" required/>
+        </label>
+      </mat-form-field>
+      <div>
+        <button class="mat-button security-buttons" type="submit" [disabled]="!loginForm.valid">Basic auth</button>
+        <button class="mat-button security-buttons" type="button"
+                [disabled]="status === undefined || status.indexOf('IN') === -1" (click)="logOut()">Logout
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="msg-container">
+    <ul *ngIf="actions">
+      <li *ngFor="let val of actions">{{val}}</li>
+    </ul>
+  </div>
+
+</div>
+
+
+<div *ngIf="status" [ngClass]="status.indexOf('IN') === -1 ? 'hide':'display'" class="actions-container">
+  <h2>Actions for logged users</h2>
+  <h3>How roles works: user1 has ROLE_USER1, user2 has ROLE_USER1 and ROLE_USER2 etc. Test buttons below. <br> I am
+    checking
+    if authorities from spring security works correctly.
+    Users should have access only to configured resources.</h3>
+
+  <div class="actions-buttons">
+    <button class="mat-button security-buttons" (click)="actionUser(1)">USER 1 BUTTON</button>
+    <button class="mat-button security-buttons" (click)="actionUser(2)">USER 2 BUTTON</button>
+    <button class="mat-button security-buttons" (click)="actionUser(3)">USER 3 BUTTON</button>
+  </div>
+</div>
+
+

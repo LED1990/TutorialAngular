@@ -1,0 +1,70 @@
+.security-buttons {
+  width: 150px;
+  height: 150px;
+  background-color: #1976d2;
+  color: white;
+  font-size: larger;
+  /*transition-duration: 0.5s;*/
+  transition: all 0.5s ease-in-out;
+}
+
+.security-buttons {
+  float: right;
+  margin-left: 5px;
+}
+
+.security-buttons:hover:enabled {
+  background-color: cornflowerblue;
+  cursor: pointer;
+  color: black;
+}
+
+.login-container {
+  display: flex;
+}
+
+.msg-container {
+  width: 50%;
+  float: right;
+  background-color: beige;
+}
+
+.security-buttons:disabled {
+  color: black;
+  background-color: lightgray;
+}
+
+.login-form-container {
+  width: 50%;
+  margin-left: 5%;
+}
+
+.security-form {
+  display: grid;
+  width: 85%;
+}
+
+.actions-container {
+  width: 50%;
+  margin-left: 5%;
+}
+
+.actions-buttons {
+  width: 85%;
+}
+
+.success {
+  color: green;
+}
+
+.failed {
+  color: red;
+}
+
+.display {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

@@ -28,6 +28,7 @@ export class NoteComponent implements OnInit {
   private checkEvent(router: Router) {
     router.events.subscribe(value => {
       if (value instanceof NavigationEnd) {
+        //todo restrict only note component invokcation
         this.msg.logAndAddMsessage([], '[NoteComponent] opening existing note');
         this.getNoteFromService();
         this.getNoteImageFromService();
