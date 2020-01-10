@@ -9,7 +9,7 @@ import {HeroDetailComponent} from './fundamentals/hero-detail/hero-detail.compon
 import {MessagesComponent} from './fundamentals/messages/messages.component';
 import {FundamentalsRoutingModule} from './fundamentals/routes/fundamentals-routing.module';
 import {DashboardComponent} from './fundamentals/dashboard/dashboard.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
 import {MenuComponent} from "./notatki/components/menu.component";
 import {MaterialModule} from "./material/material.module";
 import {IntroductionComponent} from './notatki/components/introduction/introduction.component';
@@ -20,6 +20,7 @@ import { NoteComponent } from './notatki/components/note/note.component';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { SecurityComponent } from './notatki/components/security/security.component';
 import {AuthInterceptorService} from "./notatki/interceptors/auth-interceptor.service";
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -49,11 +50,15 @@ import {AuthInterceptorService} from "./notatki/interceptors/auth-interceptor.se
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.ERROR,
       disableConsoleLogging: false
+    }),
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'X-XSRF-TOKEN',
     })
 
 //added here is available for everybody
   ],
-  providers: [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptorService, multi:true}],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptorService, multi:true}, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

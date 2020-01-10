@@ -8,7 +8,7 @@ export class MessagesAndLogsService {
 
   msgArray: string[] = [];
 
-  constructor(private logger: NGXLogger){
+  constructor(private logger: NGXLogger) {
   }
 
   /**
@@ -25,8 +25,5 @@ export class MessagesAndLogsService {
     }
   }
 
-  getMessages(){
-    this.logger.debug('current messages: ', this.msgArray);
-  }
   //TODO NAGULAR HTTP AND SUBSRIBE ERROR HANDLING!!!!!!!!!!!!!!!!!!!!!
 }
